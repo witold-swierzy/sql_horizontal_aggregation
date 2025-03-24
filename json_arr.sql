@@ -53,7 +53,7 @@ create or replace type body json_arr_impl is
   is
   begin
     if self.return_value is null then
-        self.return_value := '['||value||;
+        self.return_value := '['||value;
     else
         self.return_value := self.return_value||','||value;
     end if;
@@ -82,7 +82,9 @@ end;
 
 CREATE OR REPLACE FUNCTION json_arr_vc(input varchar2) RETURN clob 
 PARALLEL_ENABLE AGGREGATE USING json_arr_impl;
+/
 
 CREATE OR REPLACE FUNCTION json_arr_n(input number) RETURN clob 
 PARALLEL_ENABLE AGGREGATE USING json_arr_impl;
+/
 
